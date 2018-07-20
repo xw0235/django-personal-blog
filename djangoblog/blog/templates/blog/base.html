@@ -1,18 +1,56 @@
 <!-- Base HTML Template for the blog project  --> 
 {% load staticfiles %}
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8"> 
 		<title>John's Personal Blog</title>
 		<!-- Add CSS style sheets or Bootstrap links here--> 
+
+		<!--included bootstrap CDN -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+		<!--included my own css style sheet-->
+		 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 
 
 
 
 	</head>
 	<body>
-		<h1>John's Personal Blog</h1>
-		
+		<!-- Page header -->
+		<div >
+			<h1><a href="\"> John's Personal Blog </a></h1>
+		</div>
+
+		<nav class="navbar navbar-inverse">
+  			<div class="container-fluid">
+    		<ul class="nav navbar-nav">
+      			<li class="active"><a href="/">Home</a></li>
+      			<li><a href="">Projects</a></li>
+      			<li><a href="">Resume</a></li>
+      			<!-- in Django, we dont need to explicity say what the link is, we can use our url.py to set the link-->
+      			<!-- 'about_page' is the same name we use within our urls.py-->
+      			<li><a href="{% url 'about_page' %}">About</a></li>
+    		</ul>
+  			</div>
+		</nav>		
+
+
+		<div class="content container">
+			<!-- Content is divided into seperate rows within the container -->
+			 <div class="row">
+			 	<!-- Row has one column that takes 8/12 spaces -->
+            	<div class="col-md-8">
+            		<!-- block content, this is where other html blocks will be inserted  -->
+            		{% block content %}
+            		{% endblock %}
+            </div>
+        </div>
+
+
+		</div>
 
 
 	</body>

@@ -39,4 +39,24 @@ class Post(models.Model):
 		return self.title
 
 
+class ProjectPost(models.Model):
+	author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+	title = models.CharField(max_length = 200)
+	description = models.TextField()
+	link = models.CharField(max_length = 250)
+
+	start_date = models.DateTimeField(blank=True, null=True)
+
+	#choice field 
+	#testing for now, may change to a better solution later
+	#ON_GOING_CHOICES define the choices that can be selected
+	ON_GOING_CHOICES = (('INC', 'Incomplete'), ('CPLT', 'Complete'),  ('DROP', 'Dropped'),)
+
+	#on_going_project fills in the CharField with the ability to choose from the choices 
+	on_going_project = models.CharField(
+		max_length = 4,
+		choices = ON_GOING_CHOICES,
+		default = 'INC',)
+
+
 
