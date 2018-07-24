@@ -25,7 +25,7 @@ class Post(models.Model):
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
 	published_date = models.DateTimeField(blank=True, null=True)
-	photo = models.ImageField(upload_to='images', blank=True, null=True)
+	image = models.ImageField(upload_to='images', blank=True, null=True)
 
 	#publish sets the publish date to the time now 
 	def publish(self):
@@ -37,6 +37,14 @@ class Post(models.Model):
 	#returns the title 
 	def __str__(self):
 		return self.title
+
+
+	#adds a property to the image
+	#returns the image url, allows for better checking if image exists 
+	@property
+	def image_url(self):
+		if self.image and hasattr(self.image, 'url'):
+			return self.image.url	
 
 
 class ProjectPost(models.Model):

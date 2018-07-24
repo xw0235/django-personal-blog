@@ -4,9 +4,28 @@
 {% block content %}
 
 <h1> About </h1>
-<p>This is my about page</p>
 
-<img src="{% static 'media/images/profile.png' %}" class="img-thumbnail" alt="profile" style = "width:50%"/>
+<div class="row">
+	<div class="col-md-8">
+		
+		<p>
+		This is my about page </br> 
+		 Bulbasaur (/ˈbʌlbəˌsɔːr/), known as Fushigidane (フシギダネ) in Japan,[1] is the first Pokémon species in Nintendo and Game Freak's Pokémon franchise. Designed by Ken Sugimori, their name is a combination of the words "bulb" and "dinosaur." First appearing in Pokémon Red and Green as a Starter Pokémon, they later appeared in subsequent sequels, spin-off games, related merchandise, and animated and printed adaptations of the franchise.
+
+		Known as the Seed Pokémon, Bulbasaur can survive for days solely on sunlight. It is a central character in the anime, being one of Ash's main Pokémon for the first season, and a different one later being obtained by May. It is featured in various manga, and is owned by protagonist Red in the Pokémon Adventures manga. Bulbasaur has been featured in myriad pieces of merchandise, including toys, key chains, and plush dolls.
+		</p>
+
+	</div>
+	<div class="col-md-4">
+
+		<img src="{% static 'media/images/profile.png' %}" class="img-thumbnail" alt="profile" style = "width:100%"/>
+
+	</div>
+	
+
+</div>
+
+
 
 
 {% endblock %}

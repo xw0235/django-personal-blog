@@ -1,9 +1,24 @@
 /*container-fluid is a full width container that spans the entire width of the view*/
 .container-fluid{
+	
 
 
 }
 
+.page-header {
+    
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: black;
+    font-size: 32pt;
+    text-decoration: none;
+}
+
+
 .row{
+
 	
 }
