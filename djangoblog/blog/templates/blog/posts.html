@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %} 
+{% load staticfiles %}
+
+
+<!-- posts html, displays the blog posts
+extends the base.html  -->
+
+
+
+	{% block content %}
+		{%for post in posts %}
+
+		<!-- post header -->
+	<div class="container-fluid" style="min-height: 400px; max-height: 750px; border-bottom: 1px solid #ccc;">
+		<div>
+			<p>{{post.published_date}}</p>
+			<h3>{{post.title}}</h3>
+		</div>
+
+		<!-- content from post -->
+		<div class="row">
+			<div class="col-md-9">
+				<p>{{post.text}}</p>
+
+			
+			</div>
+			<div class="col-md-3">
+
+				<!-- we get our image using the image_url function within our model-->
+				<!-- if the post does not have an image, then it will default to a blank src-->
+				<img src="{{ post.image_url|default_if_none:'' }}"  style = "width:100%"/>
+
+
+
+			</div>
+		</div>
+
+	</div>
+		
+
+
+
+	{%endfor%}
+
+
+
+
+
+{% endblock %}
