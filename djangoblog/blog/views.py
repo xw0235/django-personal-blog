@@ -22,8 +22,13 @@ def about_page(request):
 	return render(request, 'blog/about.html', {})
 
 
+#currently simple search looking for post objects that titles contain the query word 
 def search_posts(request):
-	query = self.request.GET.get('q');
-	searched_posts =Post.objects.filter(name__contains=q)
-	return render(request, 'blog/posts.html', {'posts':searched_posts})
+	#in my search form, the get value name is 'q'
+	#the request gets the value which then I used to query my database for
+	#all post objects that title contains the query word
+	if 'q' in request.GET:
+		query = request.GET.get('q');
+	searched_posts =Post.objects.filter(title__contains=query)
+	return render(request, 'blog/search.html', {'posts':searched_posts})
 
