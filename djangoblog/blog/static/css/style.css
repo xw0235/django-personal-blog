@@ -22,3 +22,19 @@
 
 	
 }
+
+.navbar-nav-right{
+
+	float: right; 
+
+
+}
+
+.highlight-box{
+	width: 300px;
+    height: 300px;
+    border: 1px dashed ;
+    border-color: #D3D3D3;
+    box-sizing: border-box;
+    padding-left: 10px;
+}

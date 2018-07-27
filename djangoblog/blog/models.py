@@ -16,9 +16,11 @@ Posts contain
 
 The First 5 is the same as the tutorial, I can add more later
 
-DONT FORGET, YOU NEED TO REGISTER THE MODEL TO admin.py 
+Dont forget to register models to admin.py 
 
 '''
+
+#Post model, represents post within the blog
 class Post(models.Model):
 	author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 	title = models.CharField(max_length=200)
@@ -47,6 +49,7 @@ class Post(models.Model):
 			return self.image.url	
 
 
+#project posts
 class ProjectPost(models.Model):
 	author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 	title = models.CharField(max_length = 200)
@@ -56,15 +59,50 @@ class ProjectPost(models.Model):
 	start_date = models.DateTimeField(blank=True, null=True)
 
 	#choice field 
-	#testing for now, may change to a better solution later
-	#ON_GOING_CHOICES define the choices that can be selected
-	ON_GOING_CHOICES = (('INC', 'Incomplete'), ('CPLT', 'Complete'),  ('DROP', 'Dropped'),)
+	#ON_STATUS_CHOICES define the choices that can be selected
+	ON_STATUS_CHOICES = (('INC', 'Incomplete'), ('CPLT', 'Complete'),  ('DROP', 'Dropped'),)
 
 	#on_going_project fills in the CharField with the ability to choose from the choices 
-	on_going_project = models.CharField(
+	status = models.CharField(
 		max_length = 4,
-		choices = ON_GOING_CHOICES,
+		choices = ON_STATUS_CHOICES,
 		default = 'INC',)
+
+
+	#Project type choice field
+	PROJECT_TYPE_CHOICES = (('GRP', 'Group'), ('INDV', 'Individual'))
+	project_type = models.CharField(
+		max_length = 4,
+		choices = PROJECT_TYPE_CHOICES,
+		default = 'INDV',)
+
+
+	#returns the title 
+	def __str__(self):
+		return self.title
+
+	#gets the status as complete word, not abbreviation
+	def get_status(self):
+		return self.get_status_display()
+
+	def get_type(self):
+		return self.get_project_type_display()
+
+	
+
+
+
+#about page posts 
+#simple post 
+class AboutPost(models.Model):
+	header = models.CharField(max_length = 200)
+	text = models.TextField()
+
+	#returns the title 
+	def __str__(self):
+		return self.header
+
+
 
 
 
