@@ -7,7 +7,7 @@
 <!-- Displays projects by the blogger -->
 {% block content %}
 
-	<h1>Projects</h1></br>
+	<h1>Projects</h1>
 
 	{% for project in projects %}
 
@@ -32,3 +32,18 @@
 
 
 {% endblock %}
+
+
+{% block highlight %}
+
+	{% for highlight in highlights %}
+	<div class="container-fluid">
+
+		<p>• {{highlight.header}}</br>
+		<a href="{{ highlight.link }}"> {{highlight.link}}</a></p>
+
+	</div>	
+
+	{% endfor %}
+
+{%endblock%}

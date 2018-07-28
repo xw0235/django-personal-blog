@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import os
 
 # Create your models here.
 
@@ -10,11 +11,13 @@ Posts contain
 1. Author
 2. Title
 3. Description
-4. Create Date
-5. Publish Date
-6. Image Upload
+4. Post Type
+5. Create Date
+6. Publish Date
+7. Image Upload
 
-The First 5 is the same as the tutorial, I can add more later
+
+The First 5 is the same as the tutorial
 
 Dont forget to register models to admin.py 
 
@@ -25,15 +28,29 @@ class Post(models.Model):
 	author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 	title = models.CharField(max_length=200)
 	text = models.TextField()
+
+	#Indicates what type of post
+	POST_TYPE_CHOICES = (('BLG', 'Blog'), ('ABT', 'About'))
+	post_type = models.CharField(
+		max_length = 4,
+		choices = POST_TYPE_CHOICES,
+		default='BLG',)
+
+
 	created_date = models.DateTimeField(default=timezone.now)
 	published_date = models.DateTimeField(blank=True, null=True)
 	image = models.ImageField(upload_to='images', blank=True, null=True)
+
+
 
 	#publish sets the publish date to the time now 
 	def publish(self):
 		self.published_date = timezone.now()
 		#save seems to be a form of an update method 
 		self.save()
+
+	def get_post_type(self):
+		return self.get_post_type_display()
 
 
 	#returns the title 
@@ -88,19 +105,50 @@ class ProjectPost(models.Model):
 	def get_type(self):
 		return self.get_project_type_display()
 
-	
 
 
 
-#about page posts 
-#simple post 
-class AboutPost(models.Model):
-	header = models.CharField(max_length = 200)
-	text = models.TextField()
+#highlights posts
+class Highlight(models.Model):
+	header = models.CharField(max_length=200)
+	link = models.CharField(max_length=250, blank=True, default='')
 
-	#returns the title 
+	#can add more highlight choices here 
+	HIGHLIGHT_CHOICES = (('POST', 'Post'), ('PROJ','Projects'), ('RESU','Resume'), ('ABOT','About') )
+	highlight_type = models.CharField(
+		max_length = 4,
+		choices = HIGHLIGHT_CHOICES,
+		default='POST',)
+
+	#returns the header
 	def __str__(self):
 		return self.header
+
+
+#Document class for files 
+#allows blogger to upload documents to site
+#currently used in resume page 
+class Document(models.Model):
+	title = models.CharField(max_length=200)
+	description = models.TextField()
+
+	#fileField, will be stored in static/media/files
+	doc = models.FileField(upload_to='files')
+
+	#returns the title
+	def __str__(self):
+		return self.title
+
+	def get_file_type(self):
+		filename, file_extension = os.path.splitext(self.doc.url)
+		return file_extension
+
+
+
+
+
+
+
 
 
 

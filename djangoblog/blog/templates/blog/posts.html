@@ -13,14 +13,14 @@ extends the base.html  -->
 		<!-- post's header -->
 	<div class="container-fluid" style="min-height: 400px; max-height: 750px; border-bottom: 1px solid #ccc;">
 		<div>
-			<p>{{post.published_date}}</p>
+			<p>Posted: {{post.published_date}}</p>
 			<h3>{{post.title}}</h3>
 		</div>
 
 		<!-- content from post -->
 		<div class="row">
 			<div class="col-md-9">
-				<p>{{post.text}}</p>
+				<p>{{post.text|linebreaks}}</p>
 
 			
 			</div>
@@ -43,7 +43,18 @@ extends the base.html  -->
 	{%endfor%}
 
 
-
-
-
 {% endblock %}
+
+{% block highlight %}
+
+	{% for highlight in highlights %}
+	<div class="container-fluid">
+
+		<p>• {{highlight.header}}</br>
+		<a href="{{ highlight.link }}"> {{highlight.link}}</a></p>
+
+	</div>	
+
+	{% endfor %}
+
+{%endblock%}

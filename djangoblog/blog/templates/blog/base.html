@@ -72,10 +72,15 @@
               <div class="col-md-3" style="padding-left: 80px;" >
                 <div class="highlight-box">
                   <h3>Highlights</h3>
-                  <p>Add highlights, links and other things here!</br></br>
+
+                  {% block highlight %}
+                  {% endblock %}
+
+                  <!-- Initial static highlight content -->
+<!--                   <p>Add highlights, links and other things here!</br></br>
                     <a href="https://github.com/john-f2/django-personal-blog"> https://github.com/john-f2/django-personal-blog</a>
 
-                  </p>
+                  </p> -->
 
                   
                 </div>
