@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %} 
+{% load staticfiles %}
+
+<!-- resume html page -->
+
+<!-- this block content will be inserted into the base.html -->
+<!-- Displays blogger's resume and links it to be downloaded -->
+{% block content %}
+
+	<h1>Resume</h1>
+
+	
+	{% for document in documents %}
+		<div class="container-fluid" style="border-bottom: 1px solid #ccc;">
+			<h3>{{document.title}}</h3>
+			<p>{{document.description|linebreaks}}</p>
+			
+
+			{% if document.get_file_type == '.pdf' %}
+				<embed src="{{document.doc.url}}" width="700px" height="700px" /> 
+			{% else %}
+				<p>Click here to download</p>
+				<a href="{{document.doc.url}}" download>
+  				<img src="{% static 'media/images/download_icon.png' %}" alt="Download" width="100" height="100">
+				</a>
+			{% endif %}
+		</div>
+	{%endfor%}
+	
+
+
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %} 
+{% load staticfiles %}
+
+<!-- Projects html page -->
+
+<!-- this block content will be inserted into the base.html -->
+<!-- Displays projects by the blogger -->
+{% block content %}
+
+	<h1>Projects</h1>
+
+	{% for project in projects %}
+
+		<div class="container-fluid" style="min-height: 325px; max-height: 750px; border-bottom: 1px solid #ccc;">
+
+			<h3>{{project.title}}</h3>
+
+			<p><b>Start Date</b>: {{project.start_date}} &nbsp; | &nbsp; <b>Status</b>: {{project.get_status}} &nbsp; | &nbsp; <b>Type</b>: {{project.get_type}} </p></br>
+
+			<p>{{project.description}}</p></br>
+
+			<p>Link: <a href="https://github.com/">{{project.link}}</a></p></br>
+
+
+
+
+		</div>
+
+	{% endfor %}
+
+
+
+
+{% endblock %}
+
+
+{% block highlight %}
+
+	{% for highlight in highlights %}
+	<div class="container-fluid">
+
+		<p>• {{highlight.header}}</br>
+		<a href="{{ highlight.link }}"> {{highlight.link}}</a></p>
+
+	</div>	
+
+	{% endfor %}
+
+{%endblock%}

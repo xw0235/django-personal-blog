@@ -1,32 +1,54 @@
 {% extends 'blog/base.html' %} 
 {% load staticfiles %}
 
+<!-- About page html, displays posts that are type 'about' -->
+<!-- I combined about page posts with the same post object as regular blog post. I originally created a seperate model class for about post, but felt I could have combined the two. They can be seperated out later -->
+
+
 {% block content %}
 
-<h1> About </h1>
 
+	<!-- Loops through all the 'about post' and puts on their own row  -->
+	{% for post in about_posts %}
 
-<div class="row">
-	<div class="col-md-8">
+		<div class="row">
+		<div class="col-md-8">
+			<h3>{{post.title}}</h3>
+			<p>{{post.text|linebreaks}}</p>
 		
-		<p>
-		This is my about page </br> 
-		 Bulbasaur (/ˈbʌlbəˌsɔːr/), known as Fushigidane (フシギダネ) in Japan,[1] is the first Pokémon species in Nintendo and Game Freak's Pokémon franchise. Designed by Ken Sugimori, their name is a combination of the words "bulb" and "dinosaur." First appearing in Pokémon Red and Green as a Starter Pokémon, they later appeared in subsequent sequels, spin-off games, related merchandise, and animated and printed adaptations of the franchise.
 
-		Known as the Seed Pokémon, Bulbasaur can survive for days solely on sunlight. It is a central character in the anime, being one of Ash's main Pokémon for the first season, and a different one later being obtained by May. It is featured in various manga, and is owned by protagonist Red in the Pokémon Adventures manga. Bulbasaur has been featured in myriad pieces of merchandise, including toys, key chains, and plush dolls.
-		</p>
+		</div>
 
-	</div>
-	<div class="col-md-4">
+		<div class="col-md-4">
 
-		<img src="{% static 'media/images/profile.png' %}" class="img-thumbnail" alt="profile" style = "width:100%"/>
+			<!-- Sets the associated image next to the text in a seperate column-->
+			<!-- this img src originally displayed a static link to a profile image-->
+			<img src="{{ post.image_url|default_if_none:'' }}"  style = "width:100%; hight:100%;"/>
 
-	</div>
+		</div>
 	
 
-</div>
+		</div>
+
+
+	{% endfor %}
 
 
 
 
 {% endblock %}
+
+
+{% block highlight %}
+
+	{% for highlight in highlights %}
+	<div class="container-fluid">
+
+		<p>• {{highlight.header}}</br>
+		<a href="{{ highlight.link }}"> {{highlight.link}}</a></p>
+
+	</div>	
+
+	{% endfor %}
+
+{%endblock%}
